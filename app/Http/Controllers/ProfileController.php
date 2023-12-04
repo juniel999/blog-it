@@ -57,4 +57,21 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function upload_image(Request $request) {
+        $validatedData = $request->validate([
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $user = Auth::user();
+
+        if ($request->hasFile('profile_picture') && $request->file('profile_picture')->isValid()) {
+            if($user->hasMedia('profile_picture')) {
+                $user->clearMediaCollection('profile_picture');
+            }
+
+            $user->addMediaFromRequest('profile_picture')->toMediaCollection('profile_picture'); // Associating uploaded image with post
+            return redirect()->back()->with('success', 'Image uploaded successfully');
+        }
+    }
 }
