@@ -12,15 +12,16 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Profile') }}
+                    <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
+                        {{ __('Feed') }}
                     </x-nav-link>
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <a href="" class="flex mr-7 items-center">
+                <a href="{{ route('posts.create') }}" class="flex mr-7 items-center">
                     <img src="{{ asset('assets/write.svg') }}" alt="" class="h-4 object-fit">
                     <p class="text-gray-500 text-sm font-medium">Write</p>
                 </a>
@@ -30,7 +31,12 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            @if (Auth::user()->hasMedia('profile_picture'))
+                                <img src="{{ Auth::user()->getFirstMediaUrl('profile_picture')  }}" class="object-contain w-8 h-8 hover:opacity-80 rounded-full mr-1" alt="profile pic">
+                            @else
+                                <img src="{{ asset('images/profile_image.jpg') }}" class="object-fit h-8 rounded-full mr-1 hover:border-2 border-gray-200" alt="profile pic">
+                            @endif
+                            {{-- <div>{{ Auth::user()->name }}</div> --}}
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
