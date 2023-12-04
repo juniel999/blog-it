@@ -14,6 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -34,4 +35,26 @@
             </main>
         </div>
     </body>
+    <script>
+        $(document).ready(function() {
+            $(document).on('submit', '#add-like', function(event) {
+                event.preventDefault();
+
+                var postData = $(this).serialize();
+                var url = $(this).attr('action');
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: postData,
+                    success: function(responseData) {
+                        $('#' + url.substring(url.lastIndexOf('/') + 1)).html(responseData); // Update the content of the div with the post ID
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
 </html>

@@ -2,6 +2,8 @@
     <div class="flex items-center space-x-0">
         @if ($post->user->hasMedia('profile_picture'))
             <img class="rounded-full w-8 h-8 object-contain" src="{{ $post->user->getFirstMediaUrl('profile_picture') }}" alt="profile pic">
+        @else
+            <img class="rounded-full w-8 h-8 object-contain" src="{{ asset('images/profile_image.jpg') }}" alt="profile pic">
         @endif
         <a href="" class="pl-2 font-bold">{{ $post->user->name }} <x-time-formatter :time="$post->created_at" /></a>
     </div>
@@ -16,9 +18,17 @@
     </div>
     <div class="pl-2 flex items-center space-x-2">
         <div class="flex items-center">
-            <img class="object-fit h-8 w-8 cursor-pointer" src="{{asset('assets/like.svg')}}" alt="">
-            <p class="font-bold text-gray-600 text-sm">23</p>
+            <form id="add-like" action="{{ route('posts.add-like', $post) }}" method="POST">
+                @csrf
+                <button type="submit">
+                    <img class="object-fit h-8 w-8 cursor-pointer" src="{{asset('assets/like.svg')}}" alt="">
+                </button>
+            </form>
+            <div id="{{ $post->id }}">
+                <p class="font-bold text-gray-600 text-sm">{{ $post->viaLoveReactant()->getReactionCounterOfType('Like')->getCount() }}</p>
+            </div>
         </div>
         <a  href="{{ route('posts.show', $post) }}">Take a Read...</a>
     </div>
 </div>
+
