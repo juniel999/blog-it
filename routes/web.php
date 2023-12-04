@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/profile/picture', [ProfileController::class, 'upload_image'])->name('profile.upload.image');
     });
 
+    Route::post('posts/likes/add_like/{post}', [PostController::class, 'add_like'])->name('posts.add-like');
     Route::resource('posts', PostController::class);
 });
 

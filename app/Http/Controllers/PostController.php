@@ -16,7 +16,11 @@ class PostController extends Controller
         $posts = Post::latest()
             ->with([ 'user' => function($query) {
                 $query->with('media');
-            }])
+            }
+            , 'loveReactant' => function($query) {
+                $query->with('reactionCounters');
+            }
+            ])
             ->paginate(10);
 
         return view('posts.index', compact('posts'));
@@ -89,5 +93,19 @@ class PostController extends Controller
             return redirect()->route('posts.index')->with('success' , 'Blog successfully deleted');
         }
 
+    }
+
+    public function add_like(Request $request, Post $post) {
+        $reacterFacade = Auth::user()->viaLoveReacter();
+
+        if($reacterFacade->hasReactedTo($post, 'Like')) {
+            $reacterFacade->unreactTo($post, 'Like');
+        } else {
+            $reacterFacade->reactTo($post, 'Like');
+        }
+
+        $post->load('loveReactant.reactionCounters');
+
+        return view('posts.likes', compact('post'));
     }
 }
