@@ -5,12 +5,15 @@
                 <form method="POST" action="{{ route('posts.store') }}" class="max-w-lg mx-auto" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-5">
+                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
                         <input type="text" name="title" placeholder="Title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mb-5">
+                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
                         <textarea name="description" placeholder="dsf" class="focus:ring-blue-500"></textarea>
                     </div>
                     <div class="mb-5">
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
                         <input type="file" name="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <x-primary-button>Publish</x-primary-button>

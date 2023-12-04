@@ -14,7 +14,10 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()
-        ->paginate(10);
+            ->with([ 'user' => function($query) {
+                $query->with('media');
+            }])
+            ->paginate(10);
 
         return view('posts.index', compact('posts'));
     }
@@ -35,7 +38,7 @@ class PostController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $post = Post::create([
@@ -44,7 +47,7 @@ class PostController extends Controller
         ]);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $post->addMediaFromRequest('image')->toMediaCollection('images'); // Associating uploaded image with post
+            $post->addMediaFromRequest('image')->toMediaCollection('images');
         }
 
         return redirect()->route('posts.index');
@@ -55,7 +58,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $post->load('user.media');
+
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -79,6 +84,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if($post->user->id == Auth::id()) {
+            $post->delete();
+            return redirect()->route('posts.index')->with('success' , 'Blog successfully deleted');
+        }
+
     }
 }
