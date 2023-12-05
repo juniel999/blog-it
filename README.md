@@ -1,66 +1,106 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+![Logo](https://lh3.googleusercontent.com/pw/ADCreHecUL2jF4XyK0MNF0Mt4MdwopWOuO5YAjaabnFoDY1NCnjDQhSpFMj70CPt3_ftQ1fYjLLRwN8ZUbrDTOaqcPsz5a5xYGXueFsxkgJYsTi6fzGoKMcEmZQ90uLd1sBHH12IC2kMUBdTpPBiCeG7lteJN-3b5sKi-1CCbscnXjCDob_PYt-jFv2bwigYEU9pZivPD1dpvNwXH4MuBdthSPaw_AvCau3dWHWUw5mCiBhY7wzuQy_HDzsEW7_Wy7nNXdnJmDZQ59wX4VlchPvsGejS2AkfLYb83kY_-CIp0P_--Ty4zBTjh2jv7IjWYDn8pwwDk3ueYZD4dw_WvI3P3GtP3Kh9-_cm5XOo1ZDjcygW1s1-WgX0GiT2R9Z5oZD6Ir_cxDOIIBXuPopxAjpPuUuwBQpX1yGvhEGsEbSOdnAL3ZtFeFjQYBHT9iG6gCm-vBcIgo2WmyTLGqFOM77yGBkf0r9BiwQ5JPxGRsFOpBaQFUtwJfMr3z-Jt1mr3ifvb_NCAt1g0DuCY7kKh0XA0mh5SDQSkbj4fABQe9dNAMXm-QWmzaoy8Ys5gi6EW1MCDDEkqrwKUzARDvva8CHpP9hAOf1kni64jXdbwmxusXSyl6h_NpaCvIko9jappXccX0LMYSuWy0gD3-LZ0_7dzh10S6WrxA12fJukGHfiuJ4Uuq87jmRnykuu0ffMYaxMQqtoo4UzY2Dm9i25tjWxrini4GyLmHPtyQn2pffKuZGf4ys8Q2OidNhKeBDGad4pVa_7HV8_dAMlCfWkibsbf80yphHKwr3TSsf582OGZURiMREobv5WFB_234A9UxnE88fZjZDi5ccs1OlQCZ0z07x-tsJMtsjW2pZAh0SO_tKKF77BxqKYHKn-HDkDu4SV76Q3IYdjC6_upDt2EBOR03PcjqpGjEb5Hl-y5W0JzAAKIgKh2E9rpyYC9O3qagd383i2HtPJ4A=w423-h274-s-no-gm?authuser=0)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Blog Project
 
-## About Laravel
+This Laravel Blog Project is a user-friendly platform on Laravel, using Breeze and Laravel Spatie Media Library. Tailored for users to express their thoughts, with Breeze's authentication and Spatie's media handling, it's a seamless space for effortlessly sharing ideas and stories.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tech Stack
 
-## Learning Laravel
+**Client:** Blades, Jquery, TailwindCSS
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Server:** Laravel
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Features
 
-## Laravel Sponsors
+- Light/dark mode
+- Like reaction to blogs
+- Authentication using breeze
+- Cross platform
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/juniel999/laravel-blog-post.git
+```
+
+Go to the project directory
+
+```bash
+  cd laravel-blog-post
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+```bash
+  composer install
+```
+
+Run Migrations and Seeder
+
+```bash
+  php artisan migrate
+```
+```bash
+  php artisan db:seed --class=AdminSeeder
+```
+```bash
+  php artisan db:seed 
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+```bash
+  php artisan serve
+```
+
+Admin User
+
+```bash
+  email: juniel999@gmail.com
+  password: 123123123
+```
+
+
+## Optimizations
+
+Enabled eager loading to eliminate n+1 queries
+
+
+## Appendix
+
+Key Features:
+
+Breeze Authentication: Offers a secure and hassle-free login system, ensuring a seamless user experience.
+
+Spatie Media Library Integration: Simplifies managing images, videos, and media within blog posts, enhancing content presentation.
+
+This project aims to create a welcoming space for bloggers and writers to share their stories and perspectives effortlessly. With its robust features and smooth functionalities, it encourages users to focus on their content while handling the technicalities seamlessly.
+## Support
+
+For support, email junielhussain@gmial.com or join our Discord channel.
+
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Contributions are always welcome!
 
-## Code of Conduct
+Please adhere to this project's `code of conduct`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+## Authors
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- [@juniel999](https://github.com/juniel999e)
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
