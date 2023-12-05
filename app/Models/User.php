@@ -61,4 +61,10 @@ class User extends Authenticatable implements HasMedia, ReacterableInterface
     public function posts() {
         return $this->hasMany(Post::class);
     }
+
+    // 'attachments' media collection
+    public function attachments()
+    {
+        return $this->media()->where('collection_name', 'profile_picture');
+    }
 }

@@ -5,7 +5,7 @@
         @else
             <img class="rounded-full w-8 h-8 object-contain" src="{{ asset('images/profile_image.jpg') }}" alt="profile pic">
         @endif
-        <a href="" class="pl-2 font-bold">{{ $post->user->name }} <x-time-formatter :time="$post->created_at" /></a>
+        <a href="{{ route('users.show', $post->user) }}" class="pl-2 font-bold">{{ $post->user->name }} <x-time-formatter :time="$post->created_at" /></a>
     </div>
     <div class="flex flex-col space-x-10 justify-between items-center md:flex-row">
         <div class="flex flex-col justify-between p-2 leading-normal">

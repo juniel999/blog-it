@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img src="{{ asset('assets/blog-it-logo.png') }}" class="block h-12 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <img src="{{ asset('assets/blog-it_logo.png') }}" class="block h-12 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
@@ -14,9 +14,6 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
                         {{ __('Feed') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('users.show', Auth::user())" :active="request()->routeIs('users.show', Auth::user())">
-                        {{ __('Profile') }}
                     </x-nav-link>
                 </div>
 
@@ -50,8 +47,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('users.show', Auth::user())">
                             {{ __('Profile') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Settings') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->

@@ -28,12 +28,17 @@ class PostController extends Controller
             ])
             ->paginate(10);
 
-        $reacterFacade = Auth::user()->viaLoveReacter();
-
-        $suggested_blogs = $posts->sortByDesc(function ($post) {
+        $suggested_blogs = Post::with(['user' => function($query) {
+            $query->with('media');
+        },
+        'loveReactant' => function($query) {
+            $query->with('reactionCounters');
+        }
+        ])->get()
+        ->sortByDesc(function ($post) {
             return $post->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
-        })->forPage(1, 5);
-
+        })
+        ->take(5);
 
         return view('posts.index', compact('posts', 'suggested_blogs'));
     }
@@ -84,7 +89,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -92,7 +97,25 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        if(Auth::id() == $post->user->id) {
+            $post->update($validatedData);
+
+            if($request->hasFile('image') && $request->file('image')->isValid()) {
+                $post->clearMediaCollection('images');
+
+                $post->addMediaFromRequest('image')->toMediaCollection('images');
+            }
+
+            return redirect()->route('posts.show', $post);
+        }
+
+        return redirect()->back();
     }
 
     /**

@@ -48,8 +48,17 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $posts = $user->posts()->with([ 'user' => function($query) {
+            $query->with('media');
+        }
+        , 'loveReactant' => function($query) {
+            $query->with('reactionCounters');
+        }
+        ])->get();
 
-        return view('users.show', compact('user'));
+        $user->load('media');
+
+        return view('users.show', compact('user', 'posts'));
     }
 
     /**
