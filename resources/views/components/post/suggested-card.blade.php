@@ -1,8 +1,8 @@
 <li class="py-3 sm:py-4">
     <div class="flex items-center">
         <div class="flex-shrink-0">
-            @if ($post->hasMedia('images'))
-                <img class="w-8 h-8 rounded-full" src="{{ $post->getFirstMediaUrl('images') }}" alt="{{ $post->title }} image">
+            @if ($post->user->hasMedia('profile_picture'))
+                <img class="w-8 h-8 rounded-full" src="{{ $post->user->getFirstMediaUrl('profile_picture') }}" alt="{{ $post->title }} image">
                 @else
                 <img class="w-8 h-8 rounded-full" src="{{ asset('images/profile_image.jpg') }}" alt="{{ $post->title }} image">
             @endif

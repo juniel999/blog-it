@@ -24,6 +24,4 @@ class Post extends Model implements HasMedia, ReactableInterface
     public function user() {
         return $this->belongsTo(User::class);
     }
-
-
 }

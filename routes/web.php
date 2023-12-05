@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         Route::patch('/profile/picture', [ProfileController::class, 'upload_image'])->name('profile.upload.image');
     });
+
+    Route::post('users/follow/{user}', [UserController::class, 'follow_user'])->name('users.follow');
+    Route::resource('users', UserController::class);
 
     Route::post('posts/likes/add_like/{post}', [PostController::class, 'add_like'])->name('posts.add-like');
     Route::resource('posts', PostController::class);
