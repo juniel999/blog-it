@@ -21,7 +21,7 @@
                     @endif
                     <div class="flex flex-col">
                         <div class="flex">
-                            <p class="text-xl mr-3">{{ $post->user->name }}</p>
+                            <a class="text-xl mr-3" href="{{ route('users.show', $post->user) }}">{{ $post->user->name }}</a>
                             @if (Auth::check() && Auth::id() != $post->user->id)
                                 <form action="{{ route('users.follow', $post->user) }}" method="POST">
                                     @csrf
