@@ -6,11 +6,19 @@
                     <h1 class="font-black text-5xl text-gray-800">{{ $post->title }}</h1>
                 </div>
                 <div class="mt-5 flex items-center space-x-5">
-                    <img
-                        src="{{ $post->user->getFirstMediaUrl('profile_picture') }}"
-                        alt="profile picture"
-                        class="rounded-full object-contain h-20"
-                    />
+                    @if($post->user->hasMedia('profile_picture'))
+                        <img
+                            src="{{ $post->user->getFirstMediaUrl('profile_picture') }}"
+                            alt="profile picture"
+                            class="rounded-full object-contain h-20"
+                        />
+                    @else
+                        <img
+                            src="{{ asset('images/profile_image.jpg') }}"
+                            alt="profile picture"
+                            class="rounded-full object-contain h-20"
+                        />
+                    @endif
                     <div class="flex flex-col">
                         <div class="flex">
                             <p class="text-xl mr-3">{{ $post->user->name }}</p>

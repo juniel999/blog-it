@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\DB;
+use Cog\Laravel\Love\ReactionType\Models\ReactionType;
+
 
 class PostController extends Controller
 {
@@ -23,7 +28,14 @@ class PostController extends Controller
             ])
             ->paginate(10);
 
-        return view('posts.index', compact('posts'));
+        $reacterFacade = Auth::user()->viaLoveReacter();
+
+        $suggested_blogs = $posts->sortByDesc(function ($post) {
+            return $post->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
+        })->forPage(1, 5);
+
+
+        return view('posts.index', compact('posts', 'suggested_blogs'));
     }
 
     /**
