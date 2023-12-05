@@ -16,11 +16,16 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 
+//laravel follow
+use Overtrue\LaravelFollow\Traits\Follower;
+use Overtrue\LaravelFollow\Traits\Followable;
+
+
 use App\Models\Post;
 
 class User extends Authenticatable implements HasMedia, ReacterableInterface
 {
-    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia, Reacterable;
+    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia, Reacterable, Follower, Followable;
 
     /**
      * The attributes that are mass assignable.
