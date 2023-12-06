@@ -19,6 +19,15 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function followers(User $user) {
+
+        $followers = $user->followers()->with([
+            'media'
+        ])->get();
+
+        return view('users.followers', compact('followers'));
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -58,7 +67,10 @@ class UserController extends Controller
 
         $user->load('media');
 
-        return view('users.show', compact('user', 'posts'));
+        $followers = $user->followers()->count();
+        $followings = $user->followings()->count();
+
+        return view('users.show', compact('user', 'posts', 'followers', 'followings'));
     }
 
     /**

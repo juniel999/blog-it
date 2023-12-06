@@ -103,19 +103,18 @@ class PostController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        if(Auth::id() == $post->user->id) {
-            $post->update($validatedData);
-
-            if($request->hasFile('image') && $request->file('image')->isValid()) {
-                $post->clearMediaCollection('images');
-
-                $post->addMediaFromRequest('image')->toMediaCollection('images');
-            }
-
-            return redirect()->route('posts.show', $post);
+        if (Auth::id() != $post->user->id) {
+            return redirect()->back();
         }
 
-        return redirect()->back();
+        $post->update($validatedData);
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $post->clearMediaCollection('images'); // Remove previous image(s) from the collection
+            $post->addMediaFromRequest('image')->toMediaCollection('images'); // Add new image to the collection
+        }
+
+        return redirect()->route('posts.show', $post);
     }
 
     /**
