@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::post('users/follow/{user}', [UserController::class, 'follow_user'])->name('users.follow');
+    Route::get('users/followers/{user}/all', [UserController::class, 'followers'])->name('users.followers');
     Route::resource('users', UserController::class);
 
     Route::post('posts/likes/add_like/{post}', [PostController::class, 'add_like'])->name('posts.add-like');
