@@ -3,7 +3,7 @@
         <div class="flex w-full m-4">
             <div class="flex items-center">
                 @if ($follower->hasMedia('profile_picture'))
-                    <img class="h-20 w-20 rounded-full object-contain" src="{{ $follower->getFirstMediaUrl('profile_picture') }}" />
+                    <img class="h-20 w-20 bg-gray-800 rounded-full object-contain" src="{{ $follower->getFirstMediaUrl('profile_picture') }}" />
                 @else
                     <img class="h-20 rounded-full object-contain" src="{{ asset('images/profile_image.jpg') }}" />
                 @endif

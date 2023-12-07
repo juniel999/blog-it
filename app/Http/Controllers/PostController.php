@@ -79,9 +79,14 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post->load('user.media');
+        $post->load(['user.media']);
+        $paginatedComments = $post->comments()
+            ->with(['user.media', ])
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
-        return view('posts.show', compact('post'));
+
+        return view('posts.show', compact('post', 'paginatedComments'));
     }
 
     /**
@@ -123,6 +128,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         if($post->user->id == Auth::id()) {
+            $post->comments()->delete();
             $post->delete();
             return redirect()->route('posts.index')->with('success' , 'Blog successfully deleted');
         }
