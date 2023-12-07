@@ -3,7 +3,7 @@
         <div class="flex items-center">
             <div class="flex-shrink-0">
                 @if ($post->user->hasMedia('profile_picture'))
-                    <img class="w-8 h-8 rounded-full" src="{{ $post->user->getFirstMediaUrl('profile_picture') }}" alt="{{ $post->title }} image">
+                    <img class="w-14 h-14 object-contain bg-gray-800 rounded-full" src="{{ $post->user->getFirstMediaUrl('profile_picture') }}" alt="{{ $post->title }} image">
                     @else
                     <img class="w-8 h-8 rounded-full" src="{{ asset('images/profile_image.jpg') }}" alt="{{ $post->title }} image">
                 @endif

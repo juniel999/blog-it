@@ -10,7 +10,7 @@
                         <img
                             src="{{ $post->user->getFirstMediaUrl('profile_picture') }}"
                             alt="profile picture"
-                            class="rounded-full object-contain h-20"
+                            class="rounded-full object-contain h-20 w-20 bg-gray-800 "
                         />
                     @else
                         <img
@@ -50,6 +50,36 @@
                 <div class="mt-10 text-xl leading-10 border-t-2">
                     <img src="{{ $post->getFirstMediaUrl('images') }}" class="mb-5">
                     {!! $post->description !!}
+                    <div class="flex items-center border-b-2">
+                        <form id="add-like" class="m-3" action="{{ route('posts.add-like', $post) }}" method="POST">
+                            @csrf
+                            <button type="submit">
+                                <img class="object-contain h-10 w-10 cursor-pointer" src="{{asset('assets/like.svg')}}" alt="">
+                            </button>
+                        </form>
+                        <div id="{{ $post->id }}">
+                            <p class="font-bold text-gray-600 text-xs">{{ $post->viaLoveReactant()->getReactionCounterOfType('Like')->getCount() }} likes </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <h3 class="text-3xl pt-2 my-5">Comments</h3>
+                    @if ($post->comments->isEmpty())
+                        <p class="my-3 pl-2">No comments yet.</p>
+                    @endif
+                    @foreach ($paginatedComments as $comment)
+                        <x-comment.card :comment="$comment" />
+                    @endforeach
+
+                    {{ $paginatedComments->links() }}
+
+                    <form method="POST" action="{{ route('posts.comments.store', $post) }}" class="mt-3 flex flex-col">
+                        @csrf
+                        <x-text-input name="content" autocomplete=off placeholder="Add a comment" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        <x-primary-button class="w-fit mt-2">Comment</x-primary-button>
+                    </form>
                 </div>
             </div>
         </div>

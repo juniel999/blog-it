@@ -22,6 +22,7 @@ use Overtrue\LaravelFollow\Traits\Followable;
 
 
 use App\Models\Post;
+use App\Models\Comment;
 
 class User extends Authenticatable implements HasMedia, ReacterableInterface
 {
@@ -62,9 +63,7 @@ class User extends Authenticatable implements HasMedia, ReacterableInterface
         return $this->hasMany(Post::class);
     }
 
-    // 'attachments' media collection
-    public function attachments()
-    {
-        return $this->media()->where('collection_name', 'profile_picture');
+    public function comments() {
+        return $this->hasMany(Comment::class);
     }
 }
