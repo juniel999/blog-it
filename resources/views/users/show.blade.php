@@ -35,7 +35,7 @@
                     </div>
                     <div class="p-10 basis-2/6">
                         @if ($user->hasMedia('profile_picture'))
-                            <img class="object-containt w-28 rounded-full" src="{{ $user->getFirstMediaUrl('profile_picture') }}" alt="profile picture">
+                            <img class="object-contain w-28 h-28 bg-gray-800 rounded-full" src="{{ $user->getFirstMediaUrl('profile_picture') }}" alt="profile picture">
                         @else
                         <img class="object-containt w-28 rounded-full" src="{{ asset('images/profile_image.jpg') }}" alt="profile picture">
                         @endif
