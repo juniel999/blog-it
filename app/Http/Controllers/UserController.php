@@ -20,12 +20,24 @@ class UserController extends Controller
     }
 
     public function followers(User $user) {
-
         $followers = $user->followers()->with([
             'media'
         ])->get();
 
         return view('users.followers', compact('followers'));
+    }
+
+    public function notifications() {
+        $notifications = Auth::user()->unreadNotifications;
+
+        return view('users.notifications', compact('notifications'));
+    }
+
+    public function unread_notification(Request $request, $notification_id) {
+        $notification = Auth::user()->notifications()->find($notification_id);
+
+        $notification->markAsRead();
+        return redirect()->back();
     }
 
     /**

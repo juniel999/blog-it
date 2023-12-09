@@ -20,6 +20,8 @@ Route::middleware('auth')->group(function () {
     });
 
     //users
+    Route::get('users/notifications', [UserController::class, 'notifications'])->name('users.notifications');
+    Route::post('users/unread_notification/{notification_id}', [UserController::class, 'unread_notification'])->name('users.unread-notification');
     Route::post('users/follow/{user}', [UserController::class, 'follow_user'])->name('users.follow');
     Route::get('users/followers/{user}/all', [UserController::class, 'followers'])->name('users.followers');
     Route::resource('users', UserController::class);
