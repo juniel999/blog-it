@@ -2,7 +2,7 @@
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-5 flex justify-between">
-                <div class="mb-2 basis-4/6 p-5">
+                <div class="mb-2 lg:basis-4/6 p-5">
                     <div class=" w-fit">
                         <ul class="flex text-sm">
                             <li>
@@ -22,7 +22,7 @@
                         {{$posts->links()}}
                     </div>
                 </div>
-                <div class="basis-2/6">
+                <div class="hidden lg:inline-block lg:basis-2/6">
                     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                         <div class="flex items-center justify-between mb-4">
                             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Top 5 Most Liked</h5>

@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Events\Commented;
 
 class CommentController extends Controller
 {
@@ -34,10 +35,12 @@ class CommentController extends Controller
             'content' => 'required',
         ]);
 
-        $post->comments()->create([
+        $comment = $post->comments()->create([
             'content' => $validateData['content'],
             'user_id' => Auth::id()
         ]);
+
+        event(new Commented($comment));
 
         return redirect()->back();
     }
