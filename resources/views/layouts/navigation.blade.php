@@ -25,8 +25,13 @@
                     <img src="{{ asset('assets/write.svg') }}" alt="" class="h-4 object-fit">
                     <p class="text-gray-500 text-sm font-medium">Write</p>
                 </a>
-                <a href="#" class="mr-3">
+                <a href="{{ route('users.notifications') }}" class="mr-3 flex items-center">
                     <img src="{{ asset('assets/notification.svg') }}" class="h-6 object-fit" alt="notification icon">
+                    @if (Auth::user()->unreadNotifications->isNotEmpty())
+                        <span class="-ml-2 -mt-4 inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-white bg-red-600 rounded-full">
+                            {{ Auth::user()->unreadNotifications()->count() }}
+                        </span>
+                    @endif
                 </a>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -96,8 +101,12 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
+                <x-responsive-nav-link :href="route('users.show', Auth::user())">
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('profile.edit')">
+                    {{ __('Settings') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

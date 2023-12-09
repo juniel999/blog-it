@@ -19,22 +19,13 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()
-            ->with([ 'user' => function($query) {
-                $query->with('media');
-            }
-            , 'loveReactant' => function($query) {
-                $query->with('reactionCounters');
-            }
-            ])
-            ->paginate(10);
+        ->withUserMedia()
+        ->withLoveReactantCounters()
+        ->paginate(10);
 
-        $suggested_blogs = Post::with(['user' => function($query) {
-            $query->with('media');
-        },
-        'loveReactant' => function($query) {
-            $query->with('reactionCounters');
-        }
-        ])->get()
+        $suggested_blogs = Post::withUserMedia()
+        ->withLoveReactantCounters()
+        ->get()
         ->sortByDesc(function ($post) {
             return $post->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
         })
@@ -62,12 +53,9 @@ class PostController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $post = Post::create([
-            ...$validatedData,
-            'user_id' => Auth::id()
-        ]);
+        $post = Post::create([...$validatedData, 'user_id' => Auth::id()]);
 
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+        if ($request->hasFile('image')) {
             $post->addMediaFromRequest('image')->toMediaCollection('images');
         }
 
@@ -84,7 +72,6 @@ class PostController extends Controller
             ->with(['user.media', ])
             ->orderBy('created_at', 'desc')
             ->paginate(5);
-
 
         return view('posts.show', compact('post', 'paginatedComments'));
     }
@@ -114,9 +101,8 @@ class PostController extends Controller
 
         $post->update($validatedData);
 
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $post->clearMediaCollection('images'); // Remove previous image(s) from the collection
-            $post->addMediaFromRequest('image')->toMediaCollection('images'); // Add new image to the collection
+        if ($request->hasFile('image')) {
+            $post->updateImage($request->file('image'));
         }
 
         return redirect()->route('posts.show', $post);
@@ -132,7 +118,7 @@ class PostController extends Controller
             $post->delete();
             return redirect()->route('posts.index')->with('success' , 'Blog successfully deleted');
         }
-
+        return redirect()->back();
     }
 
     public function add_like(Request $request, Post $post) {
