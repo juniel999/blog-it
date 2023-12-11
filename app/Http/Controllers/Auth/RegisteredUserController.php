@@ -15,6 +15,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SignUpEMail;
 use Illuminate\Support\Str;
+use App\Jobs\SendSignUpEmail;
 
 
 class RegisteredUserController extends Controller
@@ -47,8 +48,8 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-        Mail::to($user->email)->send(new SignUpEMail($user));
 
+        SendSignUpEmail::dispatch($user)->onQueue('emails');
         Auth::login($user);
 
         return redirect()->route('posts.index');
